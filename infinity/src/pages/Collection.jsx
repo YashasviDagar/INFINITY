@@ -8,9 +8,10 @@ const Collection = () => {
   {/*using context api we get all the datas of product */}
    const {products} = useContext(ShopContext);
    const [showFilter,setShowFilter] = useState(false);
-   const [filterProducts,setFilterPoducts] = useState([]);
+   const [filterProducts,setFilterProducts] = useState([]);
    const [category,setCategory] = useState([]);
    const [subCategory,setSubCategory] = useState([]);
+   const [sortType,setSortType] = useState('relevant');
    
   //  this is the spread operator (...) --> which means it will add all the remaining products in the category
   //if(category.includes(e.target.value))---First, the code checks: "Is the category I just clicked (e.g., 'Men') already in my selection list?"
@@ -44,7 +45,27 @@ const Collection = () => {
       productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory))
     }
 
-    setFilterPoducts(productsCopy)
+    setFilterProducts(productsCopy)
+  }
+
+  const sortProduct = () => {
+    // here we have to make a copy of the products which are selected in the category section so that we can sort them for prices.
+
+    let fpCopy = filterProducts.slice()
+
+    switch(sortType){
+      // When you call .sort(), JavaScript picks two items from your products list and labels them a and b.
+      case 'low-high':
+        setFilterProducts(fpCopy.sort((a,b)=>(a.price - b.price)))
+        break;
+
+      case 'high-low':
+        setFilterProducts(fpCopy.sort((a,b)=>(b.price - a.price)))
+        break;
+      default:
+        applyFilter();
+  
+    }
   }
 
    
@@ -52,6 +73,10 @@ const Collection = () => {
    useEffect(()=>{
       applyFilter()
    },[category,subCategory])
+
+   useEffect(()=>{
+    sortProduct()
+   },[sortType])
 
    
 
@@ -66,7 +91,7 @@ const Collection = () => {
 
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
-      
+
       {/* Filter options */}
 
       <div className='min-w-60'>
@@ -119,7 +144,13 @@ const Collection = () => {
           <Title text1={'ALL'} text2={'COLLECTIONS'} />
 
           {/* Product Sort */}
-          <select className='border-2 border-gray-300 text-sm px-2'>
+
+          {/* e.target.value (The Choice) -- e.target: Refers to the <select> element itself.
+          ((.)).value: Grabs the value of the specific <option> you clicked (e.g., "low-high" or "high-low").
+          ((.)) setSortType(...) (The State Update)
+          This is your State Setter function. It takes that value (like "high-low") and saves it into your sortType variable. */}
+
+          <select onChange={(e)=>setSortType(e.target.value)} className='border-2 border-gray-300 text-sm px-2'>
             <option value="relavant">Sort by: Relavant</option>
             <option value="low-high">Sort by: Low to High</option>
             <option value="high-low">Sort by: High to Low</option>
