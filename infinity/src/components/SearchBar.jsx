@@ -10,6 +10,10 @@ const SearchBar = () => {
     const location = useLocation();
 
     useEffect(()=>{
+      //location obj contains the current url and whenever we click and URL changes the obj changes
+      // It looks at location.pathname (e.g., /home or /collection/mens-wear).
+      // includes('collection'): If the word "collection" is anywhere in the URL path, it triggers setVisible(true).
+      // The Reset: If the user navigates away to a page like "About" or "Contact," it triggers setVisible(false), hiding the component.
         if(location.pathname.includes('collection')){
             setVisible(true)
         }else{
