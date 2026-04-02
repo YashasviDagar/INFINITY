@@ -6,7 +6,7 @@ import ProductItem from '../components/ProductItem';
 
 const Collection = () => {
   {/*using context api we get all the datas of product */}
-   const {products} = useContext(ShopContext);
+   const {products , search , showSearch} = useContext(ShopContext);
    const [showFilter,setShowFilter] = useState(false);
    const [filterProducts,setFilterProducts] = useState([]);
    const [category,setCategory] = useState([]);
@@ -36,6 +36,16 @@ const Collection = () => {
   const applyFilter =() => {
 
     let  productsCopy = products.slice()
+
+    // here it checks whether u have written anything or is the search bar is visible or not.
+    //((.productsCopy.filter(...) creates a new array containing only the items that meet the criteria inside the parentheses.
+    //((.)) item.name: It looks at the name of each product in your list.
+    //((.)) .toLowerCase(): This is used on both the product name and the user's search term. It makes the search case-insensitive, so searching for "SHIRT" will still find "shirt".
+    //((.)) .includes(): This checks if the search string exists anywhere inside the product name. For example, searching "jean" would match "Blue Jeans" and "Jean Jacket". 
+    if(showSearch && search){
+      productsCopy = productsCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    }
+
 
     if(category.length > 0){
       productsCopy = productsCopy.filter(item => category.includes(item.category))
@@ -72,7 +82,7 @@ const Collection = () => {
 
    useEffect(()=>{
       applyFilter()
-   },[category,subCategory])
+   },[category,subCategory,search,showSearch])
 
    useEffect(()=>{
     sortProduct()
