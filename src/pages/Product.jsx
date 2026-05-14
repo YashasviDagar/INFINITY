@@ -8,6 +8,9 @@ const Product = () => {
   const { productId } = useParams();
   // whenever params retrn undefined track backwards in other files to check what is happening
   const { products , currency , addToCart} = useContext(ShopContext);
+  //Here the useContext is called which is in response to createContext in the ShopContext file.  This is used inside a child component to "listen" to that phone line.
+  // Where: Inside any functional component that needs the data.
+  // What it does: It tells React, "Hey, go look at the nearest Provider for ShopContext and give me whatever is inside the value prop. Here it takes currency, products new list and addToCart"
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState("");
   const [size,setsSize] = useState('');

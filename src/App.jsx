@@ -35,7 +35,8 @@ const App = () => {
       <Footer/>
     </div>
 )
-{/**here footer is after so that it is displayed every where */}
+{/**here footer is after so that it is displayed every where.
+  element tag allows us to mount the page to the respective path!*/}
 }
 
 export default App

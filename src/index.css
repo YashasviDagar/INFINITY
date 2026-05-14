@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+/* In the tailwind CSS whenever we use flex or anything like that which has both the properties of small and large screens then when we write (flex flex-center) then this means this is for the small screens or we say for MOBILE FIRST layout then after that we write (sm:w-1/2) eg then this means that we are giving the style to the main big screen or we say DESKTOP view!!!!!! */
 a.active hr{
     display: block;
 }
@@ -19,7 +20,7 @@ a.active hr{
     display: none;
 }
 
-
+/* this is for the phone screen where in the menu we can see on which page we are in with bg black and color white. */
 @media (max-width: 640px){
     a.active{
         background-color: black;

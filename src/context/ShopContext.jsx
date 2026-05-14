@@ -4,6 +4,9 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export const ShopContext = createContext();
+// creatContext is a built in funciton this is used outside of your component to create the "Context Object." It’s like building the phone line itself.
+// Where: Usually at the top of your file or in a dedicated context file.
+// What it returns: An object that includes the (.Provider) component.
 
 const ShopContextProvider = (props) => {
 
@@ -94,12 +97,14 @@ const ShopContextProvider = (props) => {
         getCartCount,updateQuantity,
         getCartAmount,navigate
     }
+    // here these are all the things in my self made API which can be transfered amoung the files to use it accordingly.
 
     return (
         <ShopContext.Provider value={value}>
             {props.children}
         </ShopContext.Provider>
     )
+    // The Provider is a special built-in React component. Its only job is to take the value prop (the data you want to share) and "broadcast" it to every child component tucked inside {props.children}.
 }
 
 export default ShopContextProvider;

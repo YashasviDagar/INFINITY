@@ -16,6 +16,7 @@ const Navbar = () => {
       <Link to={'/'}><img src={assets.logo} className='w-36' alt="" /></Link>
 
       <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
+        {/* Here we use navlink to make changes from onw place to another.. also it provides us with the special feature of (active) class which appears on the navlink classname that showcase that that link of page is open i.e you have clicked that page therefore that page is active.. and with the ANCHOR PROPERTY IN THE index.css WHENEVER IT IS ACTIVE (FEATURE BY NAVLINK) whenever we click to any of them we can see the underlined in that specific part only and not in all as it is hidden! */}
         <NavLink to='/' className='flex flex-col items-center gap-1'>
             <p>HOME</p>
             <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
@@ -51,6 +52,8 @@ const Navbar = () => {
                 <img src={assets.cart_icon} className='w-5 min-w-5' alt="" />
                 <p className='absolute -right-1.25 -bottom-1.25 w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]'>{getCartCount()}</p>
             </Link>
+            {/* whenever we click on this setVisible is true and this will only appear on phone size and not on the desktop style -- sm:hidden 
+            --> The icon is visible on phones but becomes (display: none) as soon as the screen width hits the sm threshold (desktop/tablet).*/}
             <img onClick={() => setVisible(true)} src={assets.menu_icon} className='w-5 cursor-pointer sm:hidden' alt="" />
       </div>
 
@@ -59,7 +62,7 @@ const Navbar = () => {
       <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'}`}>
 
         <div className='flex flex-col text-gray-600'>
-
+            {/* After clicking on any of these links to are directed to close the menu bar and go to that page as setVisible(false) */}
             <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-3 cursor-pointer'>
                 <img className='h-4 rotate-180' src={assets.dropdown_icon} alt="" />
                 <p>Back</p>
