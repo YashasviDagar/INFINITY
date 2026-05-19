@@ -2,8 +2,10 @@ import React from 'react'
 
 const NewsLetter = () => {
 
+  // here this event is inbuit and has all the info about the specify action
     const onSubmitHandler = (event)=>{
         event.preventDefault();
+        // here the preventDefault is use so that the whole page is not reloaded when we submit the form
     }
   return (
     <div className='text-center'>
